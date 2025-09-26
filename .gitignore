@@ -1,0 +1,11 @@
+# Virtual Environment
+venv/
+env/
+
+# Python cache and distribution files
+__pycache__/
+*.pyc
+dist/
+
+# Do NOT include the model file here since it's small
+# heart_model.h5

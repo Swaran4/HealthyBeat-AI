@@ -1,0 +1,192 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Risk Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff; 
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            color: #3366cc;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #444;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            box-sizing: border-box;
+        }
+        
+        input:focus, select:focus {
+            background-color: #e6f0ff;
+            outline: none;
+            border-color: #3366cc;
+        }
+        
+        .help-text {
+            font-size: 12px;
+            color: #666;
+            margin-top: 3px;
+        }
+        
+        .submit-btn {
+            background-color: #3366cc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            margin: 20px auto 0;
+        }
+        
+        .submit-btn:hover {
+            background-color: #254e9c;
+        }
+        
+        .prediction {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+            background-color: #cce6ff; /* Light blue background */
+        }
+        
+        .disclaimer {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Heart Disease Risk Prediction</h2>
+        
+        <form action="/predict" method="post">
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="" disabled selected>Select</option>
+                    <option value="0">Female(0)</option>
+                    <option value="1">Male(1)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="cp">Chest Pain Type:</label>
+                <select id="cp" name="cp" required>
+                    <option value="" disabled selected>Select</option>
+                    <option value="1">Typical Angina (1)</option>
+                    <option value="2">Atypical Angina (2)</option>
+                    <option value="3">Non-anginal Pain (3)</option>
+                    <option value="4">Asymptomatic (4)</option>
+                </select>
+                <div class="help-text">Types of chest pain from 1-4</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="trestbps">Resting Blood Pressure (mm Hg):</label>
+                <input type="number" id="trestbps" name="trestbps" required>
+                <div class="help-text">Normal range: 90-120 mm Hg</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="chol">Cholesterol Level (mg/dl):</label>
+                <input type="number" id="chol" name="chol" required>
+                <div class="help-text">Desirable level: < 200 mg/dl</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="fbs">Fasting Blood Sugar > 120 mg/dl:</label>
+                <select id="fbs" name="fbs" required>
+                    <option value="" disabled selected>Select</option>
+                    <option value="0">No (0)</option>
+                    <option value="1">Yes (1)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="restecg">Resting ECG Result:</label>
+                <select id="restecg" name="restecg" required>
+                    <option value="" disabled selected>Select</option>
+                    <option value="0">Normal (0)</option>
+                    <option value="1">ST-T Wave Abnormality (1)</option>
+                    <option value="2">Left Ventricular Hypertrophy (2)</option>
+                </select>
+                <div class="help-text">Electrocardiographic results (0-2)</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="thalach">Maximum Heart Rate Achieved:</label>
+                <input type="number" id="thalach" name="thalach" required>
+                <div class="help-text">Normal max heart rate = 220 - age</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="exang">Exercise Induced Angina:</label>
+                <select id="exang" name="exang" required>
+                    <option value="" disabled selected>Select</option>
+                    <option value="0">No (0)</option>
+                    <option value="1">Yes (1)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="oldpeak">ST Depression Induced by Exercise:</label>
+                <input type="number" id="oldpeak" name="oldpeak" step="0.1" required>
+            </div>
+            
+            <button type="submit" class="submit-btn">Predict</button>
+        </form>
+        
+        {% if prediction_text %}
+            <div class="prediction">
+                {{ prediction_text }}
+            </div>
+        {% endif %}
+        
+        <div class="disclaimer">
+            This tool provides an estimation only and should not replace professional medical advice.
+        </div>
+    </div>
+</body>
+</html>
