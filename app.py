@@ -1,3 +1,8 @@
+import os
+# Force TensorFlow/Keras to use the CPU, as Render servers do not have GPUs
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+
+
 from flask import Flask, request, render_template
 from model import predict
 
