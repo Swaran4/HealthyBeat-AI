@@ -90,4 +90,4 @@ Distributed under the **MIT License**. See `LICENSE` for more information.
 
 ## 📧 Contact
 
-Project Link: \[https://www.google.com/search?q=https://github.com/Swaran4/HealthyBeat-AI\]
+Project Link: https://github.com/Swaran4/HealthyBeat-AI
